@@ -4,10 +4,9 @@ body {
     font-weight: 200;
     height: 100vh;
     margin: 0;
-    /*background: -webkit-linear-gradient(45deg, #260e1e 0%, #f57453 100%);
+    background: -webkit-linear-gradient(45deg, #260e1e 0%, #f57453 100%);
     background: -moz-linear-gradient(45deg, #260e1e 0%, #f57453 100%);
-    background: -o-linear-gradient(45deg, #260e1e 0%, #f57453 100%);*/
-    background: #fff;
+    background: -o-linear-gradient(45deg, #260e1e 0%, #f57453 100%);
 }
 
 .navbar {
