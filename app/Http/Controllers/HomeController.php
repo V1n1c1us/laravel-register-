@@ -34,4 +34,8 @@ class HomeController extends Controller
 
         return $user;
     }
+
+    public function dash() {
+        return view('dash');
+    }
 }
