@@ -38,4 +38,7 @@ class HomeController extends Controller
     public function dash() {
         return view('dash');
     }
+    public function main() {
+        return view('layouts.dashboard.main');
+    }
 }
