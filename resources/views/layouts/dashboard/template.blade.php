@@ -26,7 +26,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    @include('layouts.dashboard.sidebar')
+    @include('layouts.dashboard.sidebar') 
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -42,7 +42,7 @@
         </main>
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Your Website 2019</span>
