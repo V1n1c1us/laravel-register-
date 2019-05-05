@@ -28,13 +28,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function teste(){
-
-        $user = $this->user->all();
-
-        return $user;
-    }
-
     public function dash() {
         return view('dash');
     }

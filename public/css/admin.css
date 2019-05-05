@@ -10918,6 +10918,9 @@
     width: 2rem;
   }
 
+  .img-view-profile {
+    width: 20%;
+  }
   .topbar {
     height: 4.375rem;
   }
