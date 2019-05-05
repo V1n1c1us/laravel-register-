@@ -21,3 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/getUser', 'HomeController@getUser');
 Route::get('/dash', 'HomeController@dash');
 Route::get('/main', 'HomeController@main');
+
+
+Route::get('/user', ['as' => 'user.user','uses' => 'UserController@index']);
+Route::get('/user/edit/{id}',['as' => 'user.edit','uses' => 'UserController@edit']);
+Route::post('/user/update/{id}', 'UserController@update');
