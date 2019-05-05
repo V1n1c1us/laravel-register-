@@ -4,6 +4,11 @@
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-12">
+        <div class="button-add py-3">
+        <a href="{{ url('user/create')}}" class="btn btn-primary btn-circle">
+           <i class="fas fa-plus"></i>
+        </a>
+        </div>
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-users"></i> Usuários</h6>
@@ -47,7 +52,7 @@
                         </a>
                     </td>
                     <td></td>
-                </tr>    
+                </tr>
                 @endforeach
             </tbody>
           </table>

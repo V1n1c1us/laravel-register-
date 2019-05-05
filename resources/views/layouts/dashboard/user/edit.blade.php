@@ -8,14 +8,12 @@
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <img class="img-view-profile rounded-circle" width="100" src="https://randomuser.me/api/portraits/lego/2.jpg">
+                    <img class="img-view-profile rounded" src="{{ Storage::url($user->imgprofile)}}">
                     </div>
                     <ul class="list-group list-group-flush py-3">
                             <li class="list-group-item"><i class="far fa-user-circle "></i> {{$user->name}}</li>
                             <li class="list-group-item"><i class="far fa-envelope"></i> {{$user->email}}</li>
                           </ul>
-                    
-                    
                 </div>
             </div>
         </div>
