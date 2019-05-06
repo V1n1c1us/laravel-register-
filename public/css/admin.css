@@ -10914,12 +10914,13 @@
 
   .sidebar .nav-item .nav-link .img-profile,
   .topbar .nav-item .nav-link .img-profile {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
   }
 
   .img-view-profile {
-    width: 20%;
+    width: 15%;
+    border-radius: 50% !important;
   }
   .topbar {
     height: 4.375rem;

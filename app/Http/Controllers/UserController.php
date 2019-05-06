@@ -51,7 +51,10 @@ class UserController extends Controller
             'password' => $password,
             'imgprofile' => $fullpathThumb
         ]);
+
+        return redirect()->route('user.user')->withSuccess('Usuário criado com sucesso');
     }
+
     public function edit($id){
         $user = $this->user->find($id);
 
@@ -67,6 +70,26 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.user')->withSuccess('Usuário Editado com Sucesso');
+    }
+
+    public function delete ($id)
+    {
+        $user = $this->user->find($id);
+
+        if(isset($user)) {
+                $deletefile = $user->imgprofile;
+                $deletefilethumb = $user->imgprofile;
+                Storage::disk('public')->delete([$deletefile, $deletefilethumb]);
+                //unlink(storage_path('public/'.$image->file));
+                //unlink(storage_path('public/'.$image->file));
+                //Storage::disk('public')->delete($deletefilethumb);
+            $delete = $user->delete();
+            if($delete) {
+                return redirect()->route('user.user')->withSuccess('Usuário deletado com sucesso!');
+            } else {
+                return redirect()->route('user.user')->withSuccess('Ops.. Erro ao deletar o produto!');
+            }
+        }
     }
 
 }

@@ -8,7 +8,11 @@
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                    <img class="img-view-profile rounded" src="{{ Storage::url($user->imgprofile)}}">
+                        @if ($user->imgprofile)
+                        <img class="img-view-profile" src="{{ Storage::url($user->imgprofile)}}" alt="{{ $user->name }}" title="{{ $user->name }}">
+                        @else
+                            <img class="img-profile rounded-circle" src="{{ asset('img/user-profile-404.png') }}" alt="User">
+                        @endif
                     </div>
                     <ul class="list-group list-group-flush py-3">
                             <li class="list-group-item"><i class="far fa-user-circle "></i> {{$user->name}}</li>

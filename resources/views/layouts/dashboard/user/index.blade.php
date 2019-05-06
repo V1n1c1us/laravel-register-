@@ -51,7 +51,11 @@
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>
-                    <td></td>
+                    <td>
+                        <a href="{{ url('user/delete', $u->id)}}">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

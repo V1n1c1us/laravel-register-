@@ -28,3 +28,4 @@ Route::get('/user/create', ['as' => 'user.create','uses' => 'UserController@crea
 Route::post('/user/store', ['as' => 'user.store','uses' => 'UserController@store']);
 Route::get('/user/edit/{id}',['as' => 'user.edit','uses' => 'UserController@edit']);
 Route::post('/user/update/{id}', 'UserController@update');
+Route::get('/user/delete/{id}', 'UserController@delete');
