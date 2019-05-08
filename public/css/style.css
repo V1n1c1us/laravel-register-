@@ -1,3 +1,7 @@
+* {
+    padding: 0;
+    margin: 0;
+}
 body {
     color: #fff;
     font-family: 'Nunito', sans-serif;
@@ -20,7 +24,7 @@ body {
     color: #fff !important;
 }
 .nav-link:hover {
-    color: #f17252 !important;
+    color: #387E94 !important;
 }
 .card {
     background-color: rgba(0, 0, 0, .03) !important;
