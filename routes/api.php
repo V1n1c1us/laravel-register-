@@ -23,3 +23,16 @@ Route::group(['middleware' => ['cors']], function () {
         return User::all();
     });
 });
+
+
+Route::post('/cadastro', function (Request $request) {
+    $data = $request->all();
+    $user = User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'imgprofile' => $fullpathThumb
+    ]);
+
+    return $user;
+});

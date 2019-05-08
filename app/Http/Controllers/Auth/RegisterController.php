@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use Image;
 
 class RegisterController extends Controller
@@ -37,9 +38,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
         $this->middleware('guest');
+        $this->user = $user;
     }
 
     /**
@@ -65,25 +67,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $file = $data['imgprofile'];
+        $name = $data['name'];
+        $email = $data['email'];
+        $password = Hash::make($data['password']);
 
-        $filename = round(microtime(true) * 1000) . '.' . $file->getClientOriginalExtension();
 
-        $fullPath = 'user_profile/'.$filename;
-        $fullpathThumb = 'user_profile_thumb/'.$filename;
-        //$filepath = public_path() . DIRECTORY_SEPARATOR . 'produtos' . DIRECTORY_SEPARATOR . $filename;
-        Storage::putFileAs('public/user_profile/', $file, $filename,'public');
-        Storage::makeDirectory('public/user_profile_thumb');
+        if(isset($data['imgprofile'])){
+            $file = $data['imgprofile'];
+            $filename = round(microtime(true) * 1000) . '.' . $file->getClientOriginalExtension();
 
-        $image = Image::make('../storage/app/public/'.$fullPath)
-                        ->resize(60,60)
-                        ->save('../storage/app/public/'.$fullpathThumb);
+            $fullPath = 'user_profile/'.$filename;
+            $fullpathThumb = 'user_profile_thumb/'.$filename;
+            //$filepath = public_path() . DIRECTORY_SEPARATOR . 'produtos' . DIRECTORY_SEPARATOR . $filename;
+            Storage::putFileAs('public/user_profile/', $file, $filename,'public');
+            Storage::makeDirectory('public/user_profile_thumb');
 
-        //dd($pt);
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            $image = Image::make('../storage/app/public/'.$fullPath)
+                            ->resize(60,60)
+                            ->save('../storage/app/public/'.$fullpathThumb);
+        } else {
+            $fullpathThumb = null;
+        }
+        return $this->user->create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
             'imgprofile' => $fullpathThumb
         ]);
     }

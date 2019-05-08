@@ -31,20 +31,24 @@ class UserController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $password = Hash::make($request->input('password'));
-        $file = $request->file('imgprofile');
 
-        $filename = round(microtime(true) * 1000) . '.' . $file->getClientOriginalExtension();
 
-        $fullPath = 'user_profile/'.$filename;
-        $fullpathThumb = 'user_profile_thumb/'.$filename;
-        //$filepath = public_path() . DIRECTORY_SEPARATOR . 'produtos' . DIRECTORY_SEPARATOR . $filename;
-        Storage::putFileAs('public/user_profile/', $file, $filename,'public');
-        Storage::makeDirectory('public/user_profile_thumb');
+        if ($request->hasFile('imgprofile')){
+            $file = $request->file('imgprofile');
+            $filename = round(microtime(true) * 1000) . '.' . $file->getClientOriginalExtension();
 
-        $image = Image::make('../storage/app/public/'.$fullPath)
+            $fullPath = 'user_profile/'.$filename;
+            $fullpathThumb = 'user_profile_thumb/'.$filename;
+            //$filepath = public_path() . DIRECTORY_SEPARATOR . 'produtos' . DIRECTORY_SEPARATOR . $filename;
+            Storage::putFileAs('public/user_profile/', $file, $filename,'public');
+            Storage::makeDirectory('public/user_profile_thumb');
+
+            $image = Image::make('../storage/app/public/'.$fullPath)
                         ->resize(60,60)
                         ->save('../storage/app/public/'.$fullpathThumb);
-
+        } else {
+            $fullpathThumb = null;
+        }
         $user = $this->user->create([
             'name' => $name,
             'email' => $email,
