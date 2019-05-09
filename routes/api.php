@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\User;
 
 /*
@@ -24,7 +25,20 @@ Route::group(['middleware' => ['cors']], function () {
         return User::all();
     });
     Route::post('/create', function (Request $request) {
+
         $data = $request->all();
+
+        $validacao = Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'imgprofile' => ['mimes:jpeg,bmp,png']
+        ]);
+
+        if($validacao->fails()){
+            return $validacao->errors();
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -35,9 +49,6 @@ Route::group(['middleware' => ['cors']], function () {
 
         return $user;
     });
-    Route::post('/str', 'UserControllerApi@store');
-
-
 });
 
 
