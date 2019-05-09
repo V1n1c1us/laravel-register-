@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 /*
@@ -22,17 +23,24 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('/teste', function(){
         return User::all();
     });
+    Route::post('/create', function (Request $request) {
+        $data = $request->all();
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
+
+        $user->token = $user->createToken($user->email)->accessToken;
+
+        return $user;
+    });
+    Route::post('/str', 'UserControllerApi@store');
+
+
 });
 
 
-Route::post('/cadastro', function (Request $request) {
-    $data = $request->all();
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-        'imgprofile' => $fullpathThumb
-    ]);
 
-    return $user;
-});
+
+

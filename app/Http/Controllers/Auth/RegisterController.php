@@ -88,11 +88,16 @@ class RegisterController extends Controller
         } else {
             $fullpathThumb = null;
         }
+
+
         return $this->user->create([
             'name' => $name,
             'email' => $email,
             'password' => $password,
             'imgprofile' => $fullpathThumb
         ]);
+
+
+
     }
 }
