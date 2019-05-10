@@ -51,7 +51,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user->find($id);
-
+        if(!$user) {
+            return response()->json([
+                'status' => 'não encontado'
+            ]);
+        }
         return response()->json($user, 201);
     }
 
