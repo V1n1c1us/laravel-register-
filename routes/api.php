@@ -20,10 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['cors']], function () {
-    Route::get('/teste', function(){
-        return User::all();
+
+Route::namespace('API')->name('.api')->group(function(){
+    Route::prefix('user')->group(function(){
+        Route::get('/', 'UserController@index');
+        Route::get('/{id}', 'UserController@show');
     });
+});
+
+Route::group(['middleware' => ['cors']], function () {
+
     Route::post('/create', function (Request $request) {
 
         $data = $request->all();
